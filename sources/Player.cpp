@@ -8,7 +8,8 @@
 #include "Captain.hpp"
 #include "Contessa.hpp"
 #include "Game.hpp"
-
+int const one=1;
+int const ten = 10;
 int const six = 6;
 int const seven = 7;
 namespace coup {
@@ -30,10 +31,10 @@ namespace coup {
     Player::~Player() {}
 
     void Player::income() {
-        if (this->coins()>=10){
+        if (this->coins() >= ten) {
             throw std::invalid_argument("must do coup");
         }
-        if (this->game->num_of_players<=1) {
+        if (this->game->num_of_players <= one) {
             throw std::invalid_argument("1 or less players");
         }
         if (this->game->turn() != this->name) {
@@ -42,15 +43,15 @@ namespace coup {
         this->_coins++;
         this->last_oper = "income";
         this->game->_turn++;
-        this->game->_turn%=this->game->p.size();
-        if (!this->game->get_status()){this->game->set_status(true);}
+        this->game->_turn %= this->game->p.size();
+        if (!this->game->get_status()) { this->game->set_status(true); }
     }
 
     void Player::foreign_aid() {
-        if (this->coins()>=10){
+        if (this->coins() >= ten) {
             throw std::invalid_argument("must do coup");
         }
-        if (this->game->num_of_players<=1) {
+        if (this->game->num_of_players <= one) {
             throw std::invalid_argument("1 or less players");
         }
         if (this->game->turn() != this->name) {
@@ -59,12 +60,12 @@ namespace coup {
         this->_coins += 2;
         this->last_oper = "foreign aid";
         this->game->_turn++;
-        this->game->_turn%=this->game->p.size();
-        if (!this->game->get_status()){this->game->set_status(true);}
+        this->game->_turn %= this->game->p.size();
+        if (!this->game->get_status()) { this->game->set_status(true); }
     }
 
     void Player::coup(Player &p) {
-        if (this->game->num_of_players<=1) {
+        if (this->game->num_of_players <= one) {
             throw std::invalid_argument("1 or less players");
         }
         if (this->game->turn() != this->name) {
@@ -82,8 +83,8 @@ namespace coup {
         this->game->num_of_players--;
         this->last_oper = "coup";
         this->game->_turn++;
-        this->game->_turn%=this->game->p.size();
-        if (!this->game->get_status()){this->game->set_status(true);}
+        this->game->_turn %= this->game->p.size();
+        if (!this->game->get_status()) { this->game->set_status(true); }
     }
 
     string Player::role() { return "ohad"; }

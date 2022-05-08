@@ -14,7 +14,7 @@ namespace coup{
         Captain(Game& g,string name);
         ~Captain();
         string role();
-        void block(Player& p);
+        void block(Player& c);
         void steal(Player& p1);
     };
 }

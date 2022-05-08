@@ -13,6 +13,6 @@ namespace coup{
         ~Ambassador();
         string role();
         void transfer(Player& p1,Player& p2);
-        void block(Captain c);
+        void block(Captain& c);
     };
 }

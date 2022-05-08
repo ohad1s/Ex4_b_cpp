@@ -13,8 +13,10 @@
 #include <string>
 
 namespace coup {
-    Captain::Captain(Game& g, std::string name) : Player(g, move(name)) {
-        this->steal_from=NULL;
+    int const ten=10;
+    int const one=1;
+    Captain::Captain(Game &g, std::string name) : Player(g, move(name)) {
+        this->steal_from = NULL;
     }
 
     Captain::~Captain() {}
@@ -23,28 +25,27 @@ namespace coup {
         return "Captain";
     }
 
-    void Captain::block(Player& c) {
-        if (c.role()!="Caption"){
+    void Captain::block(Player &c) {
+        if (c.role() != "Caption") {
             throw runtime_error("this player is not Caption");
         }
-       if (c.last_oper != "steal") {
+        if (c.last_oper != "steal") {
         } else if (c.last_oper != "steal_1") {
             c._coins--;
             this->steal_from->_coins++;
         } else if (c.last_oper != "steal_2") {
-            c._coins-=2;
-            this->steal_from->_coins+=2;
-        }
-        else{
+            c._coins -= 2;
+            this->steal_from->_coins += 2;
+        } else {
             throw runtime_error("this Player cant do this block");
         }
     }
 
     void Captain::steal(Player &p1) {
-        if (this->coins()>=10){
+        if (this->coins() >= ten) {
             throw std::invalid_argument("must do coup");
         }
-        if (this->game->num_of_players<=1) {
+        if (this->game->num_of_players <= one) {
             throw std::invalid_argument("1 or less players");
         }
         if (this->game->turn() != this->name) {
@@ -54,15 +55,19 @@ namespace coup {
             throw runtime_error("this player is dead");
         }
         if (p1._coins >= 2) {
+            this->steal_from = &p1;
             p1._coins -= 2;
             this->_coins += 2;
             this->last_oper = "steal_2";
-        } else if (p1._coins == 1) {
+        } else if (p1._coins == one) {
+            this->steal_from = &p1;
             p1._coins--;
             this->_coins++;
             this->last_oper = "steal_1";
-        } else if (p1._coins == 0) { this->last_oper = "steal"; }
-        else {
+        } else if (p1._coins!=0) {
+            this->last_oper = "steal";
+            this->steal_from = &p1;
+        } else {
             throw runtime_error("coins=NEG");
         }
         this->game->_turn++;

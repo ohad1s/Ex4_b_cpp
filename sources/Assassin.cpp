@@ -36,7 +36,7 @@ namespace coup {
             throw runtime_error("this player is dead");
         }
         if (this->_coins < three) {
-            throw runtime_error("this Player does not have enough coins");
+            throw runtime_error("this Player does not have enough coins he is asssss");
         }
         if (this->coins() >= seven) {
             p.is_alive = false;

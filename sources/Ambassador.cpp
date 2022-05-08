@@ -13,6 +13,7 @@
 
 using namespace std;
 namespace coup {
+    int const ten=10;
     Ambassador::Ambassador(Game& g, std::string name) : Player(g, move(name)) {
     }
 
@@ -23,7 +24,7 @@ namespace coup {
     }
 
     void Ambassador::transfer(Player &p1, Player &p2) {
-        if (this->coins()>=10){
+        if (this->coins()>=ten){
             throw std::invalid_argument("must do coup");
         }
         if (this->game->num_of_players<=1) {
@@ -49,12 +50,12 @@ namespace coup {
         if (!this->game->get_status()) { this->game->set_status(true); }
     }
 
-    void Ambassador::block(Captain c) {
-        if (c.last_oper != "steal") {
-        } else if (c.last_oper != "steal_1") {
+   void Ambassador::block(Captain& c) {
+        if (c.last_oper == "steal") {
+        } else if (c.last_oper == "steal_1") {
             c._coins--;
             c.steal_from->_coins++;
-        } else if (c.last_oper != "steal_2") {
+        } else if (c.last_oper == "steal_2") {
             c._coins-=2;
             c.steal_from->_coins+=2;
         }
