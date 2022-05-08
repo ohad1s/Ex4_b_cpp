@@ -29,13 +29,19 @@ namespace coup{
        }
     }
     void Duke::tax(){
+        if (this->coins()>=10){
+            throw std::invalid_argument("must do coup");
+        }
+        if (this->game->num_of_players<=1) {
+            throw std::invalid_argument("1 or less players");
+        }
         if (this->game->turn() != this->name) {
             throw std::invalid_argument("turn exception");
         }
         this->_coins+=3;
         this->last_oper = "tax";
         this->game->_turn++;
-        this->game->_turn%=this->game->num_of_players;
+        this->game->_turn%=this->game->p.size();
         if (!this->game->get_status()){this->game->set_status(true);}
     }
 }

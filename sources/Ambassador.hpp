@@ -9,10 +9,10 @@
 namespace coup{
     class Ambassador : public Player{
     public:
-        Ambassador(Game g,std::string name);
+        Ambassador(Game& g,string name);
         ~Ambassador();
         string role();
-        void transfer(Player p1,Player p2);
+        void transfer(Player& p1,Player& p2);
         void block(Captain c);
     };
 }

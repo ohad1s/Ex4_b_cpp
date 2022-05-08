@@ -12,8 +12,8 @@ namespace coup {
     class Game {
     private:
         bool status;
-        vector<Player*>p;
     public:
+        vector<Player*>p;
         Game();
         ~Game();
         int _turn;

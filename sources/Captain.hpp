@@ -10,10 +10,11 @@ namespace coup{
 #pragma once
     class Captain : public Player {
     public:
-        Captain(Game g,std::string name);
+        Player* steal_from;
+        Captain(Game& g,string name);
         ~Captain();
         string role();
-        void block(Player p);
-        void steal(Player p1);
+        void block(Player& p);
+        void steal(Player& p1);
     };
 }

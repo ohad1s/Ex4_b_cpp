@@ -9,14 +9,14 @@
 namespace coup {
     class Contessa : public Player {
     public:
-        Contessa(Game g, std::string name);
+        Contessa(Game& g, std::string name);
 
         ~Contessa();
 
 
         string role();
 
-        void block(Player p);
+        void block(Assassin& a);
 
     };
 }

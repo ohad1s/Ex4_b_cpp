@@ -31,6 +31,7 @@ namespace coup {
     string Game::turn() {
         while (!this->p[(unsigned int)(this->_turn)]->is_alive){
             this->_turn++;
+            this->_turn%=this->p.size();
         }
         return this->p[(unsigned int)(this->_turn)]->name;
     }

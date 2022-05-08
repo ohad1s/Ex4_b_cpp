@@ -8,10 +8,9 @@
 #endif //CPP_EX4_A_ASSASSIN_H
 namespace coup{
     class Assassin : public Player {
-    private:
-        Player *blocked;
     public:
-        Assassin(Game g,std::string name);
+        Player *blocked;
+        Assassin(Game& g,std::string name);
         ~Assassin();
         string role();
         void coup(Player &p);

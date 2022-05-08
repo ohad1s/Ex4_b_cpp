@@ -30,28 +30,43 @@ namespace coup {
     Player::~Player() {}
 
     void Player::income() {
+        if (this->coins()>=10){
+            throw std::invalid_argument("must do coup");
+        }
+        if (this->game->num_of_players<=1) {
+            throw std::invalid_argument("1 or less players");
+        }
         if (this->game->turn() != this->name) {
             throw std::invalid_argument("turn exception");
         }
         this->_coins++;
         this->last_oper = "income";
         this->game->_turn++;
-        this->game->_turn%=this->game->num_of_players;
+        this->game->_turn%=this->game->p.size();
         if (!this->game->get_status()){this->game->set_status(true);}
     }
 
     void Player::foreign_aid() {
+        if (this->coins()>=10){
+            throw std::invalid_argument("must do coup");
+        }
+        if (this->game->num_of_players<=1) {
+            throw std::invalid_argument("1 or less players");
+        }
         if (this->game->turn() != this->name) {
             throw std::invalid_argument("turn exception");
         }
         this->_coins += 2;
         this->last_oper = "foreign aid";
         this->game->_turn++;
-        this->game->_turn%=this->game->num_of_players;
+        this->game->_turn%=this->game->p.size();
         if (!this->game->get_status()){this->game->set_status(true);}
     }
 
     void Player::coup(Player &p) {
+        if (this->game->num_of_players<=1) {
+            throw std::invalid_argument("1 or less players");
+        }
         if (this->game->turn() != this->name) {
             throw std::invalid_argument("turn exception");
         }
@@ -67,7 +82,7 @@ namespace coup {
         this->game->num_of_players--;
         this->last_oper = "coup";
         this->game->_turn++;
-        this->game->_turn%=this->game->num_of_players;
+        this->game->_turn%=this->game->p.size();
         if (!this->game->get_status()){this->game->set_status(true);}
     }
 

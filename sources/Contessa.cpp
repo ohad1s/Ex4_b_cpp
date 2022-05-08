@@ -12,15 +12,23 @@
 #include <vector>
 #include <string>
 namespace coup{
-    Contessa::Contessa(Game g, std::string name) : Player(g,name){}
+    Contessa::Contessa(Game& g, std::string name) : Player(g, move(name)) {
+    }
 
     Contessa::~Contessa(){}
 
     string Contessa::role() {
-        return "ohad";
+        return "Contessa";
     }
 
-    void Contessa::block(Player p){
-        cout<<"ohad"<<endl;
+    void Contessa::block(Assassin& a){
+        if (a.role()!="Assassin"){
+            throw runtime_error("this player is not Assassin");
+        }
+        if (a.last_oper!="coup_3"){
+            throw runtime_error("this player can not do it");
+        }
+        a.blocked->is_alive=true;
+        this->game->num_of_players++;
     }
 }

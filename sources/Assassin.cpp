@@ -15,7 +15,7 @@
 int const three = 3;
 int const seven = 7;
 namespace coup {
-    Assassin::Assassin(Game g, std::string name) : Player(g, move(name)) {
+    Assassin::Assassin(Game& g, std::string name) : Player(g, move(name)) {
         this->blocked = NULL;
     }
 
@@ -26,6 +26,9 @@ namespace coup {
     }
 
     void Assassin::coup(Player &p) {
+        if (this->game->num_of_players<=1) {
+            throw std::invalid_argument("1 or less players");
+        }
         if (this->game->turn() != this->name) {
             throw std::invalid_argument("turn exception");
         }
@@ -41,7 +44,7 @@ namespace coup {
             this->game->num_of_players--;
             this->last_oper = "coup";
             this->game->_turn++;
-            this->game->_turn %= this->game->num_of_players;
+            this->game->_turn %= this->game->p.size();
             if (!this->game->get_status()) { this->game->set_status(true); }
         } else if (this->coins() >= three) {
             this->blocked = &p;
@@ -50,7 +53,7 @@ namespace coup {
             this->game->num_of_players--;
             this->last_oper = "coup_3";
             this->game->_turn++;
-            this->game->_turn %= this->game->num_of_players;
+            this->game->_turn %= this->game->p.size();
             if (!this->game->get_status()) { this->game->set_status(true); }
         }
     }
