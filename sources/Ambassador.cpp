@@ -51,6 +51,7 @@ namespace coup {
     }
 
    void Ambassador::block(Captain& c) {
+        this->role();
         if (c.last_oper == "steal") {
         } else if (c.last_oper == "steal_1") {
             c._coins--;

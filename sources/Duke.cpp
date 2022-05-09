@@ -26,6 +26,7 @@ namespace coup {
     }
 
     void Duke::block(Player &p) {
+        this->role();
         if (p.last_oper == "foreign aid") {
             p._coins -= 2;
         } else {

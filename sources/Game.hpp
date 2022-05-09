@@ -21,7 +21,7 @@ namespace coup {
         vector <string> players();
         string winner();
         string turn();
-        bool get_status();
+        bool get_status()const;
         void set_status(bool s);
         void add_player(Player* p);
     };

@@ -47,7 +47,7 @@ namespace coup {
         return this->turn();
     }
 
-    bool Game::get_status() {
+    bool Game::get_status() const {
         return this->status;
     }
 

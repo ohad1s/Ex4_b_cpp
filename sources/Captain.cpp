@@ -26,6 +26,7 @@ namespace coup {
     }
 
     void Captain::block(Player &c) {
+        this->role();
         if (c.role() != "Caption") {
             throw runtime_error("this player is not Caption");
         }
